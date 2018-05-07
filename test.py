@@ -613,6 +613,8 @@ def general(question, event,userid,user):
     e = difflib.get_close_matches(question, a)
     if e[0] in a:
         text = checkfunction(event, userid)
+        print(text)
+        print(type(text))
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
         user.insert({'userid': userid, 'question': question, 'answer': text, 'time': datetime.now()})
 
