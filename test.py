@@ -6,6 +6,7 @@ import numpy as np
 import tensorflow as tf
 
 from cheakfunction import checkfunction
+from searchpic import searchpic
 from work import checkques
 from actor import movie_actor
 from date import movie_date
@@ -511,13 +512,12 @@ def Type(q, event, movie_name,userid,user,question,name):
                 user.insert({"UserId": userid, "NameMovie": findmovie(userid), "Cate": "type", "Question": question,
                              "Answer": detail, "Time": datetime.now()})
         elif 'แนะนำหนัง' in question:
-            detail = movie_image(event, question, userid)
             message = TemplateSendMessage(
                 alt_text='Carousel template',
                 template=CarouselTemplate(
                     columns=[
                         CarouselColumn(
-                            thumbnail_image_url=detail,
+                            thumbnail_image_url=searchpic(),
                             title='this is menu1',  #ชื่อเรื่อง
                             text='description1',  #คำอธิบาย
                             actions=[
@@ -540,7 +540,7 @@ def Type(q, event, movie_name,userid,user,question,name):
                             ]
                         ),
                         CarouselColumn(
-                            thumbnail_image_url='https://imagemovie.herokuapp.com/tt3501632.jpg',
+                            thumbnail_image_url=searchpic(),
                             title='this is menu2',
                             text='description2',
                             actions=[
@@ -609,15 +609,24 @@ def checDic(question):
         return e
 
 def general(question, event,userid,user):
-    a = ['ถามอะไรได้บ้าง', 'ทำอะไรได้บ้าง', 'การทำงาน', 'มีความสามารถไรบ้าง', 'ฟังก์ชันการทำงาน']
-    e = difflib.get_close_matches(question, a)
-    if e[0] in a:
+    a = ["ทำอะไรได้บ้าง","การทำงาน","มีความสามารถไรบ้าง","ทำไรได้","สามารถทำอะไรได้","ความสามารถของบอท","มีฟังชันอะไรบ้าง","ฟังชั่นอะไร","ความสามารถพิเศษ"]
+    b = ["สวัสดี", "ดีจ้า", "สวัสดีค่ะ", "สวัสดีครับ", "สวัส", "ดีจร้า", "ดีงับ", "สวัดดี", 'สวัสดีตอนบ่าย','สวัสดีตอนเย็น']
+    z = difflib.get_close_matches(question, a)
+    y = difflib.get_close_matches(question, b)
+    if z[0] in a:
         text = checkfunction(event, userid)
         ans = ''
         for i in text:
             ans = ans+i
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ans))
         user.insert({'userid': userid, 'question': question, 'answer': ans, 'time': datetime.now()})
+    if  y[0] in b:
+        ans = ['สวัสดีจร้า','สวัสดีค่ะ','ดีจ้า','สวัสดี']
+        text = random.choice(ans)
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
+        user.insert({'userid': userid, 'question': question, 'answer': text, 'time': datetime.now()})
+
+
 
 '''
     elif question.find('สบายดี') >= 0:
