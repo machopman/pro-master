@@ -513,12 +513,13 @@ def Type(q, event, movie_name,userid,user,question,name):
                 user.insert({"UserId": userid, "NameMovie": findmovie(userid), "Cate": "type", "Question": question,
                              "Answer": detail, "Time": datetime.now()})
         elif 'แนะนำหนัง' in question:
+
             message = TemplateSendMessage(
                 alt_text='Carousel template',
                 template=CarouselTemplate(
                     columns=[
                         CarouselColumn(
-                            thumbnail_image_url='https://imagemovie.herokuapp.com/tt3501632.jpg',
+                            thumbnail_image_url=searchpic(),
                             title='this is menu1',
                             text='description1',
                             actions=[
@@ -538,7 +539,7 @@ def Type(q, event, movie_name,userid,user,question,name):
                             ]
                         ),
                         CarouselColumn(
-                            thumbnail_image_url='https://imagemovie.herokuapp.com/tt3501632.jpg',
+                            thumbnail_image_url=searchpic(),
                             title='this is menu2',
                             text='description2',
                             actions=[
