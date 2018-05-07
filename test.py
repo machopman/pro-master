@@ -518,27 +518,27 @@ def Type(q, event, movie_name,userid,user,question,name):
                 template=CarouselTemplate(
                     columns=[
                         CarouselColumn(
-                            thumbnail_image_url=searchpic(),
-                            title='this is menu1',  #ชื่อเรื่อง
-                            text='description1',  #คำอธิบาย
+                            thumbnail_image_url='https://imagemovie.herokuapp.com/tt3501632.jpg',
+                            title='this is menu1',
+                            text='description1',
                             actions=[
                                 PostbackTemplateAction(
-                                    label='postback2',
-                                    text='postback text2',
-                                    data='action=buy&itemid=2'
+                                    label='postback1',
+                                    text='postback text1',
+                                    data='action=buy&itemid=1'
                                 ),
                                 MessageTemplateAction(
-                                    label='message2',
-                                    text='message text2'
+                                    label='message1',
+                                    text='message text1'
                                 ),
                                 URITemplateAction(
-                                    label='uri2',
-                                    uri='http://example.com/2'
+                                    label='uri1',
+                                    uri='http://mandm.plearnjai.com/'
                                 )
                             ]
                         ),
                         CarouselColumn(
-                            thumbnail_image_url=searchpic(),
+                            thumbnail_image_url='https://imagemovie.herokuapp.com/tt3501632.jpg',
                             title='this is menu2',
                             text='description2',
                             actions=[
@@ -553,14 +553,18 @@ def Type(q, event, movie_name,userid,user,question,name):
                                 ),
                                 URITemplateAction(
                                     label='uri2',
-                                    uri='http://example.com/2'
+                                    uri='http://mandm.plearnjai.com/'
                                 )
                             ]
                         )
                     ]
                 )
             )
-            line_bot_api.push_message(userid, TextSendMessage(message))
+            line_bot_api.reply_message(event.reply_token, message)
+            return 0
+
+
+
 def  checkd(question):
      name = searchMovieNameInDic(question)
      sentence = re.sub('[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890]', '', question).replace(' ', '')
