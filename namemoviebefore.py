@@ -1,7 +1,6 @@
-from linebot.models import TextSendMessage
+
 from pymongo import MongoClient
 
-from test import line_bot_api
 
 client = MongoClient("mongodb://pretty:shop1234@ds139942.mlab.com:39942/moviebot")
 db = client.moviebot
