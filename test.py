@@ -25,7 +25,8 @@ from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImagemapSendMessage, BaseSize,
                             URIImagemapAction, ImagemapArea, MessageImagemapAction, TemplateSendMessage,
-                            CarouselTemplate, CarouselColumn, MessageTemplateAction, URITemplateAction)
+                            CarouselTemplate, CarouselColumn, MessageTemplateAction, URITemplateAction,
+                            PostbackTemplateAction)
 import re
 from flask.ext.pymongo import  PyMongo
 
@@ -521,21 +522,18 @@ def Type(q, event, movie_name,userid,user,question,name):
                             title='this is menu1',  #ชื่อเรื่อง
                             text='description1',  #คำอธิบาย
                             actions=[
-                                MessageTemplateAction(
-                                    label='message1',
-                                    text='message text1'
+                                PostbackTemplateAction(
+                                    label='postback2',
+                                    text='postback text2',
+                                    data='action=buy&itemid=2'
                                 ),
                                 MessageTemplateAction(
-                                    label='message1',
-                                    text='message text1'
-                                ),
-                                MessageTemplateAction(
-                                    label='message1',
-                                    text='message text1'
+                                    label='message2',
+                                    text='message text2'
                                 ),
                                 URITemplateAction(
-                                    label='uri1',
-                                    uri='http://mandm.plearnjai.com/'
+                                    label='uri2',
+                                    uri='http://example.com/2'
                                 )
                             ]
                         ),
@@ -544,13 +542,10 @@ def Type(q, event, movie_name,userid,user,question,name):
                             title='this is menu2',
                             text='description2',
                             actions=[
-                                MessageTemplateAction(
-                                    label='message1',
-                                    text='message text1'
-                                ),
-                                MessageTemplateAction(
-                                    label='message1',
-                                    text='message text1'
+                                PostbackTemplateAction(
+                                    label='postback2',
+                                    text='postback text2',
+                                    data='action=buy&itemid=2'
                                 ),
                                 MessageTemplateAction(
                                     label='message2',
@@ -558,14 +553,14 @@ def Type(q, event, movie_name,userid,user,question,name):
                                 ),
                                 URITemplateAction(
                                     label='uri2',
-                                    uri='http://mandm.plearnjai.com/'
+                                    uri='http://example.com/2'
                                 )
                             ]
                         )
                     ]
                 )
             )
-            line_bot_api.reply_message(event.reply_token, message)
+            line_bot_api.push_message(userid, TextSendMessage(message))
 def  checkd(question):
      name = searchMovieNameInDic(question)
      sentence = re.sub('[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890]', '', question).replace(' ', '')
