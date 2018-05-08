@@ -483,7 +483,7 @@ def Type(q, event, movie_name,userid,user,question,name):
         else:
             user.insert({"UserId": userid, "NameMovie": findmovie(userid), "Cate": "type", "Question": question,
                          "Answer": detail, "Time": datetime.now()})
-    if q == 8: #
+    if q == 8:
         if 'สนุก' in question:
             if name != '' and q != 9 :
                 detail = movie_enjoy(event,question,userid)
@@ -628,7 +628,6 @@ def general(question, event,userid,user):
 
 
 
-'''
     elif question.find('สบายดี') >= 0:
         text = 'สบายดีครับ'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
@@ -719,7 +718,7 @@ def general(question, event,userid,user):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
         user.insert({'userid': userid, 'question': question, 'answer': text,'time':datetime.now()})
 
-'''
+
 if __name__ == "__main__":
     app.run()
 #movie('wonderwoman')
