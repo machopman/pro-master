@@ -211,7 +211,7 @@ def movie(event):
 
         name = re.sub('[กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฝฦใฬมฒท?ื์ิ.่๋้็เโ,ฯี๊ัํะำไๆ๙๘๗๖๕ึ฿ุู๔๓๒๑+ๅาแ]', '',
                       question).replace(' ', '')
-        movie_name = searchMovieNameInDic(question)[0]
+        movie_name = searchMovieNameInDic(question)
         if name != '' and classify != 9:  # คำถามมีชื่อหนัง
             Type(classify, event, movie_name, userid, user, question, name)
 
